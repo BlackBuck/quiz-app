@@ -1,7 +1,5 @@
-// /app/api/quizzes/[category]/route.ts
 import { NextResponse } from 'next/server';
 import { ScienceQuizzes, TechQuizzes, HistoryQuizzes } from '@/app/lib/mockdata';
-import { Category } from '@/app/lib/definitions';
 
 export async function GET(
   request: Request,
@@ -20,6 +18,6 @@ export async function GET(
 
     return NextResponse.json(filteredQuizzes);
   } catch (error) {
-    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ message: `Internal Server Error: ${error}` }, { status: 500 });
   }
 }

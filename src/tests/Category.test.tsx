@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import CategoryPage from "@/app/quizzes/[id]/page";
 
-// Mock fetch globally
 global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,

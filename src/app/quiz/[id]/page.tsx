@@ -1,4 +1,3 @@
-import QuizCard from "@/app/components/QuizCard";
 import QuizRunner from "@/app/components/QuizRunner";
 import { Metadata } from "next";
 

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import QuizRunner from "@/app/components/QuizRunner";
 import { Quiz } from "@/app/lib/definitions";
 import { ScienceCategory } from "@/app/lib/mockdata";
@@ -34,21 +34,4 @@ describe("QuizRunner Component", () => {
     expect(screen.getByText("Carbon")).toBeInTheDocument();
     
   });
-
-//   test("handles correct and incorrect answer flow", async () => {
-//     render(<QuizRunner quiz={mockQuiz} />);
-
-//     // Select correct answer for Q1
-//     fireEvent.click(screen.getByText("Water"));
-
-//     expect(
-//       await screen.findByText("Q2. Earth is the ___ planet from the sun.")
-//     ).toBeInTheDocument();
-
-//     // Select wrong answer for Q2
-//     fireEvent.click(screen.getByText("2nd"));
-
-//     expect(await screen.findByText("Quiz Completed!")).toBeInTheDocument();
-//     expect(screen.getByText("Your Score: 1 / 2")).toBeInTheDocument();
-//   });
 });

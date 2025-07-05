@@ -1,4 +1,5 @@
 import QuizCard from "@/app/components/QuizCard";
+import { Quiz } from "@/app/lib/definitions";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
@@ -27,7 +28,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ id: s
         {id} Quizzes
       </h1>
       <div className="grid gap-6 sm:grid-cols-2">
-        {quizzes.map((quiz: any) => (
+        {quizzes.map((quiz: Quiz) => (
           <QuizCard key={quiz.id} quiz={quiz} />
         ))}
       </div>
