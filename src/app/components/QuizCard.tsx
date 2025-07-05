@@ -1,4 +1,3 @@
-// app/components/QuizCard.tsx
 import Link from "next/link";
 
 export default function QuizCard({ quiz }: { quiz: { id: number; title: string; description?: string } }) {

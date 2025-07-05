@@ -1,7 +1,6 @@
 import Link from "next/link";
 import CategoryCard from "./components/CategoryCard";
 import { Category } from "./lib/definitions";
-import { getStaticProps } from "next/dist/build/templates/pages";
 
 export default async function Home() {
   const res = await fetch("http://localhost:3000/api/category", {

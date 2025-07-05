@@ -1,6 +1,6 @@
 // /app/api/quizzes/[category]/route.ts
 import { NextResponse } from 'next/server';
-import { EconomicsQuizzes, ScienceQuizzes, MathematicsQuizzes, LiteratureQuizzes } from '@/app/lib/mockdata';
+import { ScienceQuizzes, TechQuizzes, HistoryQuizzes } from '@/app/lib/mockdata';
 import { Category } from '@/app/lib/definitions';
 
 export async function GET(
@@ -9,7 +9,7 @@ export async function GET(
 ) {
   try {
     const {category} = await params;
-    const quizzes = [...EconomicsQuizzes, ...ScienceQuizzes, ...MathematicsQuizzes, ...LiteratureQuizzes];
+    const quizzes = [...ScienceQuizzes, ...TechQuizzes, ...HistoryQuizzes];
     const filteredQuizzes = quizzes.filter(
       (quiz) => quiz.category!.name.toLowerCase() === category
     );

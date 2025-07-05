@@ -1,5 +1,5 @@
 import { Quiz } from "@/app/lib/definitions";
-import { ScienceQuizzes, LiteratureQuizzes, MathematicsQuizzes, EconomicsQuizzes } from "@/app/lib/mockdata";
+import { ScienceQuizzes, TechQuizzes, HistoryQuizzes } from "@/app/lib/mockdata";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -10,13 +10,11 @@ export async function GET(
     
     switch (qid) {
         case '1':
-            return NextResponse.json(EconomicsQuizzes[0]);
-        case '2':
-            return NextResponse.json(MathematicsQuizzes[0]);
-        case '3':
             return NextResponse.json(ScienceQuizzes[0]);
-        case '4':
-            return NextResponse.json(LiteratureQuizzes[0], { status: 200 });
+        case '2':
+            return NextResponse.json(HistoryQuizzes[0]);
+        case '3':
+            return NextResponse.json(TechQuizzes[0]);
         default:
             return NextResponse.json({ error: "not found" }, { status: 404 });
     }
