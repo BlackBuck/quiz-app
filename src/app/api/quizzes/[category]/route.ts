@@ -1,27 +1,25 @@
-import { Quiz } from "@/app/lib/definitions";
-import { ScienceQuizzes, LiteratureQuizzes, MathematicsQuizzes, EconomicsCategory, EconomicsQuizzes } from "@/app/lib/mockdata";
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+// /app/api/quizzes/[category]/route.ts
+import { NextResponse } from 'next/server';
+import { EconomicsQuizzes, ScienceQuizzes, MathematicsQuizzes, LiteratureQuizzes } from '@/app/lib/mockdata';
+import { Category } from '@/app/lib/definitions';
 
-interface ResponseType {
-    message: string;
-    quizzes: Quiz[];
-}
-export default async function GET(
-    req: Request,
-    {params} : {params: {cid: string}}
-) : Promise<NextResponse<Quiz[]>> {
-    const cid = params.cid
-    switch(cid) {
-        case "1":
-            return NextResponse.json(EconomicsQuizzes)
-        case "2":
-            return NextResponse.json(MathematicsQuizzes)
-        case "3":
-            return NextResponse.json(ScienceQuizzes)
-        case "4":
-            return NextResponse.json(LiteratureQuizzes)
-        default:
-            return NextResponse.json([])       
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ category: string }> }
+) {
+  try {
+    const {category} = await params;
+    const quizzes = [...EconomicsQuizzes, ...ScienceQuizzes, ...MathematicsQuizzes, ...LiteratureQuizzes];
+    const filteredQuizzes = quizzes.filter(
+      (quiz) => quiz.category!.name.toLowerCase() === category
+    );
+
+    if (filteredQuizzes.length === 0) {
+      return NextResponse.json({ message: 'No quizzes found for this category' }, { status: 404 });
     }
+
+    return NextResponse.json(filteredQuizzes);
+  } catch (error) {
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+  }
 }

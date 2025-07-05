@@ -1,26 +1,24 @@
 import Link from "next/link";
 import CategoryCard from "./components/CategoryCard";
 import { Category } from "./lib/definitions";
-
-// app/page.tsx
-export const metadata = {
-  title: "Micro-Quiz Platform",
-  description: "Take topic-specific micro quizzes on science, history, and more.",
-};
+import { getStaticProps } from "next/dist/build/templates/pages";
 
 export default async function Home() {
-  const res = await fetch(`http://localhost:3000/api/category`);
+  const res = await fetch("http://localhost:3000/api/category", {
+    cache: "force-cache",
+  });
   const categories = await res.json();
-  console.log("categories: ", categories)
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-      {categories.map((cat: Category) => {
-        let categoryName = cat.name;
-        <Link key={categoryName} href={`/quizzes/${categoryName.toLowerCase()}`}>
-          <CategoryCard category={categoryName} />
-        </Link>
-      })}
+    <div className="max-w-5xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-center mb-6">Choose a Category</h1>
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {categories.map((cat: Category) => (
+          <Link key={cat.name} href={`/quizzes/${cat.name.toLowerCase()}`}>
+            <CategoryCard category={cat.name} />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
